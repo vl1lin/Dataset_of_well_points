@@ -231,8 +231,12 @@ export function runQuery(data, state) {
       const fluidColumns = data.fluids.length > 0
         ? Object.keys(data.fluids[0]).filter((c) => !FLUIDS_EXCLUDED.has(c))
         : [];
+      // Исследования, у которых все PVT-колонки пусты, в таблицу 4а не попадают.
+      const pvtRows = studies
+        .filter((s) => PVT_COLUMNS.some((c) => s[c] !== null))
+        .map((s) => pick(s, pvtStudyColumns));
       pvt = {
-        studies: { columns: pvtStudyColumns, rows: studies.map((s) => pick(s, pvtStudyColumns)) },
+        studies: { columns: pvtStudyColumns, rows: pvtRows },
         fluids: { columns: fluidColumns, rows: fluidRows.map((f) => pick(f, fluidColumns)) },
       };
     }

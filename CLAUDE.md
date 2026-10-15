@@ -110,7 +110,7 @@ data/
 `well, study_code, depth_m, pressure_mpa, temp_c`
 
 **Таблица 4. PVT-свойства** (только при флаге «Показать PVT-свойства»), состоит из двух частей:
-- 4а. Из `studies`: `well, study_code` + PVT-колонки `p_sat_mpa, t_res_c, gas_content_m3m3, gas_sat_m3t, gor, gor_unit, rho_oil_dead, rho_oil_res, rho_gas, rho_water`;
+- 4а. Из `studies`: `well, study_code` + PVT-колонки `p_sat_mpa, t_res_c, gas_content_m3m3, gas_sat_m3t, gor, gor_unit, rho_oil_dead, rho_oil_res, rho_gas, rho_water`. Исследования, у которых все PVT-колонки пусты, пропускаются; если не осталось ни одного, выводится «Нет данных для выбранных скважин»;
 - 4б. Из `fluids` (свойства по залежам): все строки этого месторождения, без колонок `field_code`, `source`, `note`. Если строк нет, выводится сообщение «Свойства флюидов по залежам в книге не приведены».
 
 **Таблица 5. Давление на приёме насосов (раздел 2)** (только если флаг «Скрыть режим работы ЭЦН/ШСН» **выключен** и есть данные)
