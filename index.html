@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dataset of well points — выборка данных</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Papa Parse читает CSV; версия закреплена точно -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <!-- SheetJS формирует выгрузку .xlsx; версия закреплена точно -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Выборка данных по скважинам</h1>
+    <p class="subtitle">
+      База Dataset_of_well_points (Мищенко И.Т., Палий В.О. «Газожидкостные потоки в нефтяных скважинах», 2018)
+    </p>
+  </header>
+
+  <main>
+    <p id="status" class="status">Загрузка данных…</p>
+
+    <section class="filters" aria-label="Панель выбора">
+      <div class="filter-block">
+        <span class="filter-title">Месторождения</span>
+        <div class="dropdown" id="fields-dropdown">
+          <button type="button" class="dropdown-toggle">Не выбрано</button>
+          <div class="dropdown-menu" hidden></div>
+        </div>
+        <label class="flag"><input type="checkbox" id="fields-all"> Выбрать все</label>
+      </div>
+
+      <div class="filter-block">
+        <span class="filter-title">Скважины</span>
+        <div class="dropdown" id="wells-dropdown">
+          <button type="button" class="dropdown-toggle">Не выбрано</button>
+          <div class="dropdown-menu" hidden></div>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <span class="filter-title">Параметры</span>
+        <label class="flag"><input type="checkbox" id="flag-pvt"> Показать PVT-свойства</label>
+        <label class="flag"><input type="checkbox" id="flag-hide-pump"> Скрыть режим работы ЭЦН/ШСН</label>
+      </div>
+
+      <div class="filter-block filter-buttons">
+        <button type="button" id="btn-show" disabled>Показать</button>
+        <button type="button" id="btn-download" disabled>Скачать .xlsx</button>
+      </div>
+    </section>
+
+    <section id="results" class="results" aria-label="Результат"></section>
+  </main>
+
+  <button type="button" id="panel-toggle" class="panel-toggle" aria-expanded="false" aria-controls="side-panel">
+    Работа с данными
+  </button>
+
+  <aside id="side-panel" class="side-panel" aria-label="Работа с данными">
+    <div class="panel-head">
+      <h2>Работа с данными</h2>
+      <button type="button" id="panel-close" class="panel-close" aria-label="Закрыть панель">×</button>
+    </div>
+
+    <div class="mode-tabs">
+      <button type="button" class="mode-tab" data-mode="builder">Конструктор</button>
+      <button type="button" class="mode-tab" data-mode="sql">SQL</button>
+      <button type="button" class="mode-tab" data-mode="python">Python</button>
+    </div>
+
+    <div class="panel-body">
+      <div class="mode-pane" id="pane-builder" data-mode="builder"></div>
+      <div class="mode-pane" id="pane-sql" data-mode="sql"></div>
+      <div class="mode-pane" id="pane-python" data-mode="python" hidden></div>
+    </div>
+
+    <p class="panel-note">
+      Изменения данных в панели не сохраняются: работа идёт над копией таблиц в браузере.
+    </p>
+  </aside>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
